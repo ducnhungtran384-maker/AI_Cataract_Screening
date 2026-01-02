@@ -12,7 +12,13 @@
 ### 🚨🚨🚨 **老师请注意 (Attention Please)** 🚨🚨🚨
 
 **本项目最核心的成果是一个基于 Web 的交互式数据可视化看板！**
-请务必进入 [`04visualization`](./04visualization) 文件夹，**双击打开 `index.html`**。
+
+您有两种浏览方式：
+
+1.  **🚀 在线直接体验 (推荐)**: [**点击这里进入可视化看板**](https://ducnhungtran384-maker.github.io/AI_Cataract_Screening/04visualization/index.html)
+    *(如果无法访问，请使用方式 2)*
+
+2.  **📦 本地查看**: 下载项目后，进入 `04visualization` 文件夹，双击打开 `index.html`。
 
 > 🎥 **Where the Magic Happens:**
 > 在这个看板中，您可以：
