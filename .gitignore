@@ -1,0 +1,29 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Data and Models (Large Files > 100MB)
+*.zip
+*.rar
+*.tar.gz
+*.pth
+*.pt
+*.h5
+
+# Specific Large Directories/Files
+02data/
+03result/hub/
+visualization_package.zip
+训练数据.zip
+
+# Node/Web
+node_modules/
+npm-debug.log*

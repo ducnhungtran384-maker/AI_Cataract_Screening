@@ -1,0 +1,683 @@
+:root {
+    --bg-color: #050a1b;
+    --card-bg: rgba(16, 25, 52, 0.7);
+    --primary-color: #00d4ff;
+    --secondary-color: #00ffcc;
+    --accent-color: #a259ff;
+    --text-main: #e0e6ed;
+    --text-muted: #a8b3cf;
+    --border-color: rgba(0, 212, 255, 0.2);
+    --error-color: #ff6b6b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    overflow: hidden;
+    /* 由容器内部滚动 */
+}
+
+/* 全局滚动条美化 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(10, 18, 42, 0.5);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00d4ff, #00ffcc);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #00ffcc, #a259ff);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+.app-wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 侧边栏 */
+.sidebar {
+    width: 280px;
+    background: rgba(10, 18, 42, 0.95);
+    border-right: 1px solid var(--border-color);
+    padding: 24px 15px; /* 减少内边距 */
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto; /* 增加滑动条 */
+}
+
+.logo-area {
+    margin-bottom: 25px; /* 减少底部边距 */
+    text-align: center;
+}
+
+.logo-area h1 {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    margin-bottom: 20px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;  /* 再次减少：从8px减到6px */
+    margin-bottom: 5px;  /* 从6px减到5px */
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 212, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.nav-item:hover::before {
+    width: 300%; 
+    height: 300%;
+}
+
+.nav-item i {
+    margin-right: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-item:hover {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
+.nav-item.active {
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);
+    color: var(--primary-color);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+/* 主内容区 */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+    position: relative;
+}
+
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: var(--card-bg);
+    padding: 15px 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+}
+
+/* 控制台组 - 移入侧边栏 */
+.control-section {
+    margin-top: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.control-select {
+    width: 100%;
+    background: #0a122a;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 6px;
+    outline: none;
+}
+
+/* 复选框样式增强 */
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-right: 8px;
+    accent-color: var(--primary-color);
+}
+
+/* 图表网格 */
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 24px;
+}
+
+.chart-container {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    position: relative;
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* 顺序动画 */
+.chart-container:nth-child(1) { animation-delay: 0s; }
+.chart-container:nth-child(2) { animation-delay: 0.1s; }
+.chart-container:nth-child(3) { animation-delay: 0.2s; }
+.chart-container:nth-child(4) { animation-delay: 0.3s; }
+.chart-container:nth-child(5) { animation-delay: 0.4s; }
+.chart-container:nth-child(6) { animation-delay: 0.5s; }
+
+.chart-container:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.3), 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+}
+
+.chart-title::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--primary-color);
+    margin-right: 12px;
+    border-radius: 2px;
+}
+
+/* 图表帮助按钮 */
+.chart-help-btn {
+    margin-left: 8px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(0, 212, 255, 0.15);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.chart-help-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    transform: rotate(180deg);
+}
+
+/* 图表帮助说明文字 */
+.chart-help-text {
+    margin-top: 12px;
+    padding: 10px 15px;
+    background: rgba(0, 212, 255, 0.05);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    display: none;
+    animation: fadeInDown 0.3s ease;
+}
+
+.chart-help-text.show {
+    display: block;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chart-body {
+    width: 100%;
+    height: 400px;
+}
+
+.xlarge {
+    height: 550px;  /* 从700px减到550px，留出滚动空间 */
+}
+
+/* 错误分析卡片 */
+.error-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.error-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+}
+
+.error-card:hover {
+    border-color: var(--error-color);
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.2);
+}
+
+.error-img-box {
+    width: 100%;
+    height: 220px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.error-img-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.error-info {
+    padding: 15px;
+}
+
+.error-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.true-label {
+    background: rgba(81, 207, 102, 0.2);
+    color: #51cf66;
+}
+
+.pred-label {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff6b6b;
+}
+
+.error-reason {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    font-style: italic;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dotted var(--border-color);
+}
+
+/* 标签页隐藏 */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 数据点脉动效果 */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+/* 图表标题发光效果 */
+.chart-title {
+    animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(0, 255, 204, 0.6), 0 0 25px rgba(0, 212, 255, 0.4);
+    }
+}
+
+/* 控制按钮增强 */
+.control-select {
+    transition: all 0.3s ease;
+}
+
+.control-select:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.control-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+    .app-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .logo-area h1 {
+        font-size: 1.2rem;
+    }
+
+    .nav-menu {
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+    .nav-item {
+        min-width: 120px;
+        padding: 8px 12px;
+        margin-right: 8px;
+        margin-bottom: 0;
+    }
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .control-panel {
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .control-group {
+        flex: 1 1 45%;
+    }
+}
+
+/* 移动端（小屏幕） */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .sidebar {
+        padding: 10px;
+    }
+
+    .logo-area {
+        padding: 10px;
+        text-align: center;
+    }
+
+    .logo-area h1 {
+        font-size: 1rem;
+    }
+
+    .logo-area p {
+        font-size: 0.6rem;
+        white-space: nowrap; /* 防止"成果展示"换行 */
+    }
+
+    /* 校徽缩小 */
+    .logo-area img {
+        height: 30px !important;
+    }
+
+    .nav-item {
+        min-width: 100px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .nav-item i {
+        font-size: 1rem;
+        margin-right: 4px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .header-bar h2 {
+        font-size: 1.2rem;
+    }
+
+    .info-panel {
+        width: 100%;
+        align-items: flex-start !important;
+        font-size: 0.65rem !important;
+    }
+
+    .chart-container {
+        padding: 15px;
+    }
+
+    .chart-title {
+        font-size: 0.95rem;
+    }
+
+    .chart-help-btn {
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+    }
+
+    .chart-body {
+        height: 300px !important;
+    }
+
+    .chart-body.xlarge {
+        height: 400px !important;
+    }
+
+    .control-group {
+        flex: 1 1 100%;
+        margin-bottom: 10px;
+    }
+
+    .control-group label {
+        font-size: 0.75rem;
+    }
+
+    .control-select {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    /* 复选框区域优化 */
+    #model-checkboxes,
+    #comparison-model-checkboxes {
+        max-height: 150px !important;
+        font-size: 0.8rem;
+    }
+
+    input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* 3D图操作提示 */
+    .chart-container .chart-header + div {
+        font-size: 0.7rem !important;
+        padding: 6px 10px !important;
+    }
+
+    /* 错误分析卡片 */
+    .error-card {
+        padding: 12px;
+    }
+
+    .error-card img {
+        height: 150px;
+    }
+}
+
+/* 超小屏幕（手机竖屏） */
+@media (max-width: 480px) {
+    .logo-area h1 {
+        font-size: 0.9rem;
+    }
+
+    .nav-item {
+        min-width: 80px;
+        padding: 5px 8px;
+        font-size: 0.7rem;
+    }
+
+    .nav-item i {
+        display: none; /* 隐藏图标节省空间 */
+    }
+
+    .header-bar h2 {
+        font-size: 1rem;
+    }
+
+    .chart-body {
+        height: 250px !important;
+    }
+
+    .chart-body.xlarge {
+        height: 350px !important;
+    }
+
+    .chart-title {
+        font-size: 0.85rem;
+    }
+
+    .error-card img {
+        height: 120px;
+    }
+}
+
+/* 小按钮样式 */
+.ctrl-btn-sm {
+    padding: 2px 6px; /* 进一步缩小按钮高度 */
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.65rem; /* 进一步缩小字号 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.ctrl-btn-sm:hover {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
