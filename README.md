@@ -7,6 +7,23 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0-ee4c2c)
 ![ECharts](https://img.shields.io/badge/Visualization-ECharts%205.0-green)
 
+---
+
+### 🚨🚨🚨 **老师请注意 (Attention Please)** 🚨🚨🚨
+
+**本项目最核心的成果是一个基于 Web 的交互式数据可视化看板！**
+请务必进入 [`04visualization`](./04visualization) 文件夹，**双击打开 `index.html`**。
+
+> 🎥 **Where the Magic Happens:**
+> 在这个看板中，您可以：
+> *   全方位查看 **3D 动态模型性能对比**
+> *   交互式分析 **Grad-CAM 热力图**（点击混淆矩阵中的误判案例）
+> *   查看完整的 **项目演进雷达图**
+>
+> **这是我们工作量的最大体现，请第一优先查看！**
+
+---
+
 ## 📖 项目背景 (Background)
 
 白内障是全球致盲的首要原因。在医疗资源匮乏的地区，缺乏专业的眼科医生和设备导致大量患者无法及时确诊。本课题旨在开发一套**低成本、高精度、可解释**的 AI 辅助筛查系统，通过深度学习技术对眼底图像进行自动分类，并提供“红绿灯”式的直观诊断建议，赋能基层医疗。
