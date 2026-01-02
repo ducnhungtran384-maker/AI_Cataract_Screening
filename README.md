@@ -94,7 +94,10 @@ AI_Cataract_Screening/
 
 您可以在 `05_Models` 文件夹中找到最终训练好的模型权重：
 
-*   [**best_cataract_model.pth**](./05_Models/best_cataract_model.pth) (42.7 MB) - *ResNet18, Acc 95.68%*
+*   [**best_cataract_model.pth**](./05_Models/best_cataract_model.pth) (42.7 MB) - *ResNet18, Acc 95.68% (Best)*
+*   [**densenet121-a639ec97.pth**](./05_Models/densenet121-a639ec97.pth) (30.8 MB) - *DenseNet121, Acc 96.19%*
+*   [**resnet18-f37072fd.pth**](./05_Models/resnet18-f37072fd.pth) (44.6 MB) - *ResNet18 (Pretrained Checkpoint)*
+*   [**keras_model.h5**](./05_Models/keras_model.h5) (2.3 MB) - *MobileNet Baseline (Keras)*
 
 > ⚠️ **Note**: VGG16 权重文件过大 (>500MB)，已从 GitHub 仓库中排除，如需复现请联系作者获取或重新训练。
 
