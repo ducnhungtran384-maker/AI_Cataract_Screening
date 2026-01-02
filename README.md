@@ -83,9 +83,20 @@ AI_Cataract_Screening/
 │   ├── js/data.js             # 模型性能数据 (自动注入)
 │   └── js/charts.js           # 图表渲染逻辑
 │
+├── 05_Models/             # 🧠 训练好的模型权重
+│   └── best_cataract_model.pth # ResNet18 Final Model (42MB)
+│
 ├── AI辅助白内障筛查实践报告_完美终稿.docx  # 📄 完整的项目实践报告
 └── visualization_package.zip               # 📦 完整打包的可视化系统
 ```
+
+## 🧠 模型下载 (Model Download)
+
+您可以在 `05_Models` 文件夹中找到最终训练好的模型权重：
+
+*   [**best_cataract_model.pth**](./05_Models/best_cataract_model.pth) (42.7 MB) - *ResNet18, Acc 95.68%*
+
+> ⚠️ **Note**: VGG16 权重文件过大 (>500MB)，已从 GitHub 仓库中排除，如需复现请联系作者获取或重新训练。
 
 ## 📊 实验结果 (Results)
 
