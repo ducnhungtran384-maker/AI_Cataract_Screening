@@ -17,6 +17,7 @@ env/
 *.pth
 *.pt
 *.h5
+!05_Models/*.pth  # Exception: Allow models in 05_Models folder
 
 # Specific Large Directories/Files
 02data/
